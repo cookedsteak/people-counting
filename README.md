@@ -9,7 +9,9 @@ A real-time people-counting script
 
 ## Usage ##
 
-'''python3 main.py'''
+'''
+python3 main.py
+'''
 
 ## Example ##
 
