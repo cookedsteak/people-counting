@@ -15,4 +15,5 @@ python3 main.py
 
 ## Example ##
 
+I treat 2 red bottles as 2 walking people.
 ![image](https://github.com/cookedsteak/people-counting/blob/master/example.gif)
