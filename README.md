@@ -13,4 +13,4 @@ A real-time people-counting script
 
 ## Example ##
 
-![image](https://github.com/cookedsteak/people-counting/)
+![image](https://github.com/cookedsteak/people-counting/blob/master/example.gif)
