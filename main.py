@@ -25,10 +25,10 @@ redLower = (120, 4, 24)
 redUpper = (226, 58, 96)
 
 # Standard line
-inLine = int(winWidth/2 + 30)
-outLine = int(winWidth/2 - 30)
+inLine = int(winHeight/2 + 30)
+outLine = int(winHeight/2 - 30)
 # Indoor direction
-inVector = (1,0) # x-axis
+inVector = (0,1) # y-axis
 
 inCount = 0
 outCount = 0
@@ -69,7 +69,7 @@ while True:
         print(cv2.contourArea(c))
         c_check = False
         # Guess why ^v^
-        if (cv2.contourArea(c)) < 1000 or (cv2.contourArea(c) > 30000):
+        if (cv2.contourArea(c)) < 3000 or (cv2.contourArea(c) > 30000):
             continue
 
         if cv2.contourArea(c) > 130000:
@@ -88,7 +88,7 @@ while True:
         # Record the trajectory of each object
         for k,v in enumerate(traceList):
             if math.hypot(center[0] - v[0][0], center[1] - v[0][1]) < frameDistance:
-                if (center[0] < inLine) and (center[0] > outLine):
+                if (center[1] < inLine) and (center[1] > outLine):
                     v.appendleft(center)
                     cv2.putText(frame, str(k), center, cv2.FONT_ITALIC, 1.0, (255, 255, 255), 1)
                     c_check = True
@@ -105,19 +105,21 @@ while True:
                     traceList.remove(v)
                     break
 
-        if (c_check is False) and (center[0] < inLine) and (center[0] > outLine):
+        if (c_check is False) and (center[1] < inLine) and (center[1] > outLine):
             # Treat one dot as a new center point of one object
             traceList.append(deque([center]))
 
     cv2.putText(frame, "InCount: {}".format(str(inCount)), (10, 50),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
     cv2.putText(frame, "OutCount: {}".format(str(outCount)), (10, 70), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
 
-    cv2.line(frame, (outLine, 0), (outLine, winHeight), (250, 0, 1), 2)  # blue line
-    cv2.line(frame, (inLine, 0), (inLine, winHeight), (0, 0, 255), 2)  # red line
+    cv2.line(frame, (0, outLine), (winWidth, outLine), (250, 0, 1), 2)  # blue line
+    cv2.line(frame, (0, inLine), (winWidth, inLine), (0, 0, 255), 2)  # red line
 
     cv2.imshow("contours", dst)
     cv2.imshow("origin", frame)
+
     key = cv2.waitKey(1) & 0xFF
 
-cv2.destroyAllWindows()
 vs.stop()
+output.release()
+cv2.destroyAllWindows()
