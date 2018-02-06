@@ -3,15 +3,15 @@ A real-time people-counting script
 
 ## Prerequisite ##
 
-1.Python-3.4+
-2.OpenCV3
-3.Package imutils
+1. Python-3.4+
+2. OpenCV3
+3. Package imutils
 
 ## Usage ##
 
-'''
+``` sh
 python3 main.py
-'''
+```
 
 ## Example ##
 
